@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+    <title>  Cloud Sound System</title>
+	<link rel="icon" 
+      type="image/png" 
+      href="assets/img/logo.png">
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+	<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css"  />
+        
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+	</head>
+
+  <body>
+
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+
+	  <div id="login-page">
+	  	<div class="container">
+	  	
+		      <form class="form-login" action="index.html" id="register">
+		        <h2 class="form-login-heading">Create new account</h2>
+		        <div class="login-wrap">
+				
+				<div class="input-group ">
+				<span class="input-group-addon"><i class="fa fa-user"></i></span>
+				<div >
+		           	<input type="text" class="form-control" placeholder="First Name" name="F.Name" autofocus required pattern="[A-Za-z ]{3,}" title=" At Least 3 Characters.">
+					
+				</div>	 
+					 </div>
+					 <br>
+					 <div class="input-group ">
+				<span class="input-group-addon "><i class="fa fa-users"></i></span>
+				<div >
+		           	<input type="text" class="form-control" placeholder="Last Name" required name="L.Name" pattern="[A-Za-z ]{3,}" title=" At Least 3 Characters.">
+				</div>	 
+					 </div>
+					 </br>
+					
+					<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>	
+					<input type="text" class="form-control" placeholder="Email Address" name="Email" required pattern="[A-Za-z ]{3,}" title=" Not Invalid.">		
+					 </div>
+					 </br>
+					 
+					 <div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-globe"></i></span>
+					<input type="text" class="form-control" placeholder="Country" name="counrty" required pattern="[A-Za-z ]{3,}" title=" Invalid.">
+					 </div>
+					 </br>
+					 
+					 <div class="input-group">
+				<span class="input-group-addon"><i class=" 	fa fa-map-marker"></i></span>
+					 <input type="text" class="form-control" placeholder="City" name="city" required pattern="[A-Za-z ]{3,}" title=" Invalid.">
+					 </div>
+					 </br>
+					 
+					 <div class="input-group date" data-provide="datepicker">
+				<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					 <input type="date" name="b.Date" class="form-control" required>
+					 </div>
+					 </br>
+					 
+				<div class="input-group">
+				<span class="input-group-addon"><i class=" 	fa fa-venus-mars"></i></span>					 
+					  <select name="gender" class="form-control" placeholder="Gender">
+						<option value="Male" >Gender</option>				
+						<option value="Male" >Male</option>
+							<option value="Female">Female</option>
+							</select>
+				</div>	 
+					 
+					 </br>
+					 
+					 <div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+					<input type="password" class="form-control" placeholder="Password" name="Password" required pattern="[A-Za-z ]{6,}" title=" At Least 6 Characters.">
+					</div>
+					</br>
+					
+					<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-check"></i></span>
+					<input type="password" class="form-control" placeholder="Confirm Password" name="Cpassword" required >
+					</div>
+					</br>
+					
+					<label size="5">&nbsp;&nbsp;Upload Photo :</label>
+					<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-upload"></i></span>
+					<input type="file" class="form-control" name="P.picture" required >
+					</div>
+					</br>
+										
+		            <button class="btn btn-theme btn-block" href="index.html" type="submit"> SUBMIT</button>
+					
+					<hr>
+		            <div class="registration">
+		                <a class="" href="login.html">
+		                    Already have account?
+		                </a>
+		            </div>
+					
+		        </div>
+		
+		          
+		      </form>	  	
+	  	
+	  	</div>
+	  </div>
+
+	 
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!--BACKSTRETCH-->
+    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+    <script type="text/javascript" src="assets/js/jquery.backstretch.min.js"></script>
+    <script>
+        $.backstretch("assets/img/login-bg.jpg", {speed: 500});
+    </script>
+
+
+  </body>
+</html>
