@@ -31,6 +31,60 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+	
+	<script>
+			window.addEventListener("load",connectToHtml);
+			function connectToHtml()
+			{
+				serial=document.getElementById("serialnumber").value;
+				form=document.getElementById("addsperker");
+				form.addEventListener("submit",submitFunction);
+				
+			}
+			
+			function submitFunction()
+			{
+				request=new XMLHttpRequest();
+				url="../addSpeaker.php";
+				prms="serialNumber="+serial;
+				request.open("POST","url",true);
+				request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				var resp;
+				request.onreadystatechange=function()
+				{
+					document.getElementById("diverr").setAttribute("style","display:none");
+					document.getElementById("divsucc").setAttribute("style","display:none");
+					if(request.readyState==4 && request.status==200 )
+					{
+						resp = JSON.parse(request.responseText);
+						if (resp.status == true)
+						{
+							//window.alert("test");
+							
+							succ=document.getElementById("divsucc");
+							succ.setAttribute("style","display:block");
+							
+							location.reload();
+						}
+						else
+						{
+							//window.alert("failed");
+							err=document.getElementById("diverr");
+							err.setAttribute("style","display:block");
+							
+							
+						}
+					}
+					else
+					{
+						
+					}
+				}
+				request.send(prms);
+				
+			}
+	</script>
+	
   </head>
 
   <body>
@@ -171,24 +225,27 @@
 		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		                          <h4 class="modal-title">Add Speaker</h4>
 		                      </div>
-							  <div class="alert alert-success">
-							  <Strong> Success! </strong>
-							  Your Speaker has been added successfully!
+							  
+							  <div class="alert alert-success" style="display:none;" id="divsucc">
+								  <Strong> Success! </strong>
+								  Your Speaker has been added successfully!
 							  </div>
-							  <div class="alert alert-danger">
-							  <Strong> Error! </strong>
-							  R-enter your serila number!
+							  
+							  <div class="alert alert-danger" style="display:none;" id="diverr">
+								  <Strong> Error! </strong>
+								 Wrong serial number!
 							  </div>
+							  
 							  <form id="addspeaker" method="Get">
 		                      <div class="modal-body">
 		                          <p>Enter the serila number below to add new speaker.</p>
-		                          <input type="text" name="serialnumber" placeholder="Serial Number" autofocus autocomplete="off" class="form-control placeholder-no-fix">
+		                          <input type="text" name="serialnumber" id="serialnumber" placeholder="Serial Number" autofocus autocomplete="off" class="form-control placeholder-no-fix">
 		
 		                      </div>
-		                      <form id="addspeaker">
-							  <div class="modal-footer">
+		                      <form id="addspeaker" >
+							  <div class="modal-footer" method="POST" action="dashboard.html" name="addsperker">
 							      <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-		                          <button data-dismiss="modal" class="btn btn-theme" href="dashboard.html" type="submit">Ok</button>
+		                          <button data-dismiss="modal" class="btn btn-theme"  type="submit">Ok</button>
 		                      </div>
 							  </form>
 		                  </div>

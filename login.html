@@ -26,6 +26,52 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+	
+	<script>
+			window.addEventListener("load",connectToHtml);
+			function connectToHtml()
+			{
+				email=document.getElementById("email");
+				Pass=document.getElementById("Password");
+				error=document.getElementById("diverr");
+				form=document.getElementById("login");
+				form.addEventListener("submit",submitFunction);
+				
+			}
+			
+			function submitFunction()
+			{
+				request=new XMLHttpRequest();
+				url="../login.php";
+				prms="id="+email+"&password="+pass;
+				request.open("POST","url",true);
+				request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				var resp;
+				request.onreadystatechange=function()
+				{
+					if(request.readyState==4 && request.status==200 )
+					{
+						resp = JSON.parse(request.responseText);
+						if (resp.status == 'yes')
+						{
+							//window.alert("test");
+							window.location = "localhost/airwave/dashboard.html";
+						}
+						else
+						{
+							//window.alert("failed");
+							document.getElementById("diverr").setAttribute("style","display:block");
+						}
+					}
+					else
+					{
+						
+					}
+				}
+				request.send(prms);
+				
+			}
+	</script>
   </head>
 
   <body>
@@ -37,27 +83,30 @@
 	  <div id="login-page">
 	  	<div class="container">
 	  	
-		      <form class="form-login" action="" method="" id="login">
+		      <form class="form-login" action="dashboard.html" method="POST" id="login">
 		        <h2 class="form-login-heading">sign in now</h2>
 		        <div class="login-wrap">
+					<div id="diverr" class="alert alert-danger" style="display:none;">
+						<Strong> Error! </strong>
+							E-mail or Password Invalid!
+
+					</div>
 				<div class="input-group">
-				<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+					<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 		            <input type="text" class="form-control" placeholder="E-mail" id="email" required autofocus>
 				</div>
 					
 		            <br>
-					 <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 		            <input type="password" class="form-control" placeholder="Password" id="Password" required>
-					</div>
+				</div>
 					
 		            <label class="checkbox">
 		                <span class="pull-right">
-		                    <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
-		
 		                </span>
 		            </label>
-		            <button class="btn btn-theme btn-block" href="dashboard.html" type="submit"> SIGN IN</button>
+		            <button class="btn btn-theme btn-block"  type="submit"> SIGN IN</button>
 		            <hr>
 		            <div class="registration">
 		                Don't have an account yet?<br/>
