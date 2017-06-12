@@ -36,6 +36,7 @@
 				date=document.getElementById("b.Date").value;
 				gender=document.getElementById("Gender").value;
 				pass=document.getElementById("Password").value;
+				picture=document.getElementById("P.picture");
 				
 				form=document.getElementById("register");
 				form.addEventListener("submit",submitFunction);
@@ -44,9 +45,10 @@
 			
 			function submitFunction()
 			{
+			window.alert("test");
 				request=new XMLHttpRequest();
-				url="backend/register.php";
-				prms="fname="+fname+"&lname="+lname+"Email="+email+"&Counrty="+counrty+"&City="+city+"&BirthDate="+date+"&Gender="+gender+"&pass="+pass;
+				url="../reg.php";
+				prms="F.Name="+fname+"&L.Name="+lname+"Email="+email+"&Counrty="+counrty+"&City="+city+"&b.Date="+date+"&Gender="+gender+"&Password="+pass+"&P.picture="+picture;
 				request.open("POST","url",true);
 				request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 				var resp;
@@ -54,11 +56,11 @@
 				{
 					if(request.readyState==4 && request.status==200 )
 					{
-						resp = request.responseText;
-						if (resp == 'True')
+						resp = JSON.parse(request.responseText);
+						if (resp.status == 'success')
 						{
 							//window.alert("test");
-							window.location = "login.html";
+							window.location = "localhost/airwave/login.html";
 						}
 						else
 						{
@@ -89,7 +91,7 @@
 	  <div id="login-page">
 	  	<div class="container">
 	  	
-		      <form class="form-login" method="POST" id="register">
+		      <form class="form-login" action="index.html" method="POST" id="register">
 		        <h2 class="form-login-heading">Create new account</h2>
 		        <div class="login-wrap">
 				<div id="diverr" class="alert alert-danger" style="display:none;">
@@ -160,7 +162,11 @@
 					</div>
 					</br>
 					
-
+					<label size="5">&nbsp;&nbsp;Upload Photo :</label>
+					<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-upload"></i></span>
+					<input type="file" class="form-control" name="P.picture" id="P.picture" required >
+					</div>
 					</br>
 										
 		            <button class="btn btn-theme btn-block" type="submit"> SUBMIT</button>

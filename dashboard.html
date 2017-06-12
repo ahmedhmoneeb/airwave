@@ -31,61 +31,65 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-	
-	<script>
-			window.addEventListener("load",connectToHtml);
-			function connectToHtml()
-			{
-				serial=document.getElementById("serialnumber").value;
-				form=document.getElementById("addsperker");
-				form.addEventListener("submit",submitFunction);
-				
-			}
-			
-			function submitFunction()
-			{
-				request=new XMLHttpRequest();
-				url="../addSpeaker.php";
-				prms="serialNumber="+serial;
-				request.open("POST","url",true);
-				request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				var resp;
-				request.onreadystatechange=function()
-				{
-					document.getElementById("diverr").setAttribute("style","display:none");
-					document.getElementById("divsucc").setAttribute("style","display:none");
-					if(request.readyState==4 && request.status==200 )
-					{
-						resp = JSON.parse(request.responseText);
-						if (resp.status == true)
-						{
-							//window.alert("test");
-							
-							succ=document.getElementById("divsucc");
-							succ.setAttribute("style","display:block");
-							
-							location.reload();
-						}
-						else
-						{
-							//window.alert("failed");
-							err=document.getElementById("diverr");
-							err.setAttribute("style","display:block");
-							
-							
-						}
-					}
-					else
-					{
-						
-					}
-				}
-				request.send(prms);
-				
-			}
-	</script>
-	
-  </head>
+<style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+
+	</head>
 
   <body>
 
@@ -183,7 +187,20 @@
                       	<div class="col-md-4 col-sm-4 mb">
                       		<div class="white-panel pn donut-chart">
                       			<div class="white-header">
-						  			<h5>Speaker 1</h5>
+						  			<h5>Speaker 1</h5></div>
+									<div>
+								     <div class="col-8 col-sm-6">
+                                        <img src="Photos/WIFI.png" width="130px" height="130px" style="margin-right:500px;"/>
+                                     </div>
+                                     <div class="col-4 col-sm-6">
+                                        <h3 id="country">Counry:lasd</h3>
+                                        <h3 id="city">City:asdas</h3>
+                                        <input type="range" name="price-min" id="price-min"  min="0" max="50"><br>
+                                        <label class="switch">
+                                          <input type="checkbox">
+                                          <div class="slider round"></div>
+                                        </label>
+                                     </div>
                       			</div>
 								<!-- speaker info-->
 							</div><! --/grey-panel -->
@@ -196,6 +213,7 @@
 						  			<h5>Speaker 2</h5>
                       			</div>
 								<!-- speaker info-->
+
 	                      		</div>
                       	</div>
                       	
@@ -225,27 +243,24 @@
 		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		                          <h4 class="modal-title">Add Speaker</h4>
 		                      </div>
-							  
-							  <div class="alert alert-success" style="display:none;" id="divsucc">
-								  <Strong> Success! </strong>
-								  Your Speaker has been added successfully!
+							  <div class="alert alert-success">
+							  <Strong> Success! </strong>
+							  Your Speaker has been added successfully!
 							  </div>
-							  
-							  <div class="alert alert-danger" style="display:none;" id="diverr">
-								  <Strong> Error! </strong>
-								 Wrong serial number!
+							  <div class="alert alert-danger">
+							  <Strong> Error! </strong>
+							  R-enter your serila number!
 							  </div>
-							  
 							  <form id="addspeaker" method="Get">
 		                      <div class="modal-body">
 		                          <p>Enter the serila number below to add new speaker.</p>
-		                          <input type="text" name="serialnumber" id="serialnumber" placeholder="Serial Number" autofocus autocomplete="off" class="form-control placeholder-no-fix">
+		                          <input type="text" name="serialnumber" placeholder="Serial Number" autofocus autocomplete="off" class="form-control placeholder-no-fix">
 		
 		                      </div>
-		                      <form id="addspeaker" >
-							  <div class="modal-footer" method="POST" action="dashboard.html" name="addsperker">
+		                      <form id="addspeaker">
+							  <div class="modal-footer">
 							      <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-		                          <button data-dismiss="modal" class="btn btn-theme"  type="submit">Ok</button>
+		                          <button data-dismiss="modal" class="btn btn-theme" href="dashboard.html" type="submit">Ok</button>
 		                      </div>
 							  </form>
 		                  </div>
