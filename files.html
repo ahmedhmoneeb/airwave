@@ -1,0 +1,86 @@
+window.addEventListener("load",connect);
+function connect()
+{
+	getFilesList("");
+}
+function getFilesList(URL)
+{
+	try
+	{
+		req =new XMLHttpRequest();
+		req.open("GET",URL,true);
+		req.addEventListener("readystatechange",processRequestFiles);
+		req.send();
+	}
+	catch(exception)
+	{
+		alert("Request Failed")
+	}
+}
+
+function processRequestFiles()
+{
+	if(req.readyState==4)
+	{
+		arr = JSON.parse(req.responseText);
+		filesList = arr;
+		divv = document.createElement('div');
+		for(i=0;i<arr.files_names.length;i++)
+		{
+			div1=document.createElement('div');
+			var a = document.createElement('a');
+            a.href = "";
+			a.title="file";
+			a.className="btn btn-info btn-lg";
+			var span = document.createElement('span');
+            span.setAttribute("class","glyphicon glyphicon-file");
+            a.appendChild(span);
+			div1.appendChild(a);
+			var para=document.createElement('p');
+			para.id='fileName';
+			para.appendChild(document.createTextNode(arr.files_names[i]));
+			div1.appendChild(para);
+			playspan=document.createElement('span');
+			playspan.className="glyphicon glyphicon-play";
+			playspan.id='playButton';
+			playspan.addEventListener("click",playFile,false);
+			div1.appendChild(playspan);
+			deletespan=document.createElement('span');
+			deletespan.className="glyphicon glyphicon-remove-sign";
+			deletespan.id='deleteButton';
+			deletespan.addEventListener("click",delete,false);
+			div1.appendChild(deletespan);
+			divv.appendChild(div1);
+		}
+	document.getElementById('').appendChild(divv);
+	}
+}
+function playFile(fileName)
+{
+	url = "";
+	try
+	{
+		ob=new XMLHttpRequest();
+		ob.open("GET",url,true);
+		ob.send();
+	}
+	catch(exception)
+	{
+		alert("Request Failed")
+	}
+}
+function delete(fileName)
+{
+	url = "";
+	try
+	{
+		ob=new XMLHttpRequest();
+		ob.open("GET",url,true);
+		ob.send();
+	}
+	catch(exception)
+	{
+		alert("Request Failed")
+	}
+location.reload();
+}

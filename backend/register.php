@@ -1,27 +1,26 @@
 <?php
-require 'connect.php';
+require 'connectDB.php';
 
-// Function to insert User if not exists
-
-function NewUser()
-{
 	$fname=trim($_POST['fname']);
     $lname=trim($_POST['lname']);
     $password=$_POST['pass'];
-    $EMail=trim($_POST['EMail']);
+    $Email=trim($_POST['Email']);
     $Gender=trim($_POST['Gender']);
     $Country=trim($_POST['Country']);
     $City=trim($_POST['City']);
     $BirthDate=trim($_POST['BirthDate']);
+
+	$sql = "INSERT INTO users (FName,LName,Password,Email,gender,country,city,BDate) VALUES ('$fname','$lname','$password','$Email','$Gender','$Country','$City','$BirthDate')";
     
-	$query = "INSERT INTO users (F.Name,L.Name,PassWord,Email,gender,country,city,b.date) VALUES ('$fname','$lname','$password','$EMail','$Gender','$Country','$City','$BirthDate')";
-    
-	$data = mysql_query ($query)or die(mysql_error());
-	if($data)
+	$result = $conn->query($sql);
+	if($result)
 	{
-	   echo "YOUR REGISTRATION IS COMPLETED...";
+	   echo "True";
 	}
-}
+	else
+	{
+		echo "Wrong";
+	}
 
 //checking the 'mail' if exists before or not
 
@@ -41,17 +40,5 @@ if(!empty($_POST['EMail']))
 	}
 }
 }
-if(isset($_POST['submit_check'])) /// regButton 
-{
-	SignUp();
-}
-
-
-
-
-
-
-
-
 
 ?>

@@ -22,11 +22,19 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/css/style-responsive.css" rel="stylesheet">
 		
-		
 		<script>
 			
 			window.addEventListener("load",connectToHtml);
 			function connectToHtml()
+			{
+
+				
+				form=document.getElementById("submitButton");
+				form.addEventListener("click",submitFunction);
+				
+			}
+			
+			function submitFunction()
 			{
 				fname=document.getElementById("F.Name").value;
 				lname=document.getElementById("L.Name").value;
@@ -36,36 +44,31 @@
 				date=document.getElementById("b.Date").value;
 				gender=document.getElementById("Gender").value;
 				pass=document.getElementById("Password").value;
-				
-				form=document.getElementById("register");
-				form.addEventListener("submit",submitFunction);
-				
-			}
-			
-			function submitFunction()
-			{
+				//window.alert(fname);
 				request=new XMLHttpRequest();
 				url="backend/register.php";
-				prms="fname="+fname+"&lname="+lname+"Email="+email+"&Counrty="+counrty+"&City="+city+"&BirthDate="+date+"&Gender="+gender+"&pass="+pass;
-				request.open("POST","url",true);
+				prms="fname="+fname+"&lname="+lname+"&Email="+email+"&Counrty="+counrty+"&City="+city+"&BirthDate="+date+"&Gender="+gender+"&pass="+pass;
+				request.open("POST",url,true);
 				request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 				var resp;
 				request.onreadystatechange=function()
 				{
 					if(request.readyState==4 && request.status==200 )
 					{
-						resp = request.responseText;
-						if (resp == 'True')
+						var resp = String(request.responseText);
+						//window.alert(request.responseText);
+
+						if (resp.trim() == "True")
 						{
 							//window.alert("test");
-							window.location = "login.html";
+							window.location = "login.php";
 						}
 						else
 						{
 							//window.alert("failed");
 							err=document.getElementById("diverr");
 							err.setAttribute("style","display:block");
-							errr.innerHTML = resp.reason;
+							err.innerHTML = resp;
 							
 						}
 					}
@@ -78,6 +81,7 @@
 				
 			}
 	</script>
+		
 </head>
 
   <body>
@@ -163,7 +167,7 @@
 
 					</br>
 										
-		            <button class="btn btn-theme btn-block" type="submit"> SUBMIT</button>
+		            <button class="btn btn-theme btn-block" type="button" id="submitButton"> SUBMIT</button>
 					
 					<hr>
 		            <div class="registration">

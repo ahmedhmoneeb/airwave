@@ -25,7 +25,17 @@
     <link href="assets/css/style-responsive.css" rel="stylesheet">
 
     <script src="assets/js/chart-master/Chart.js"></script>
-    
+    <script>
+    	<?php
+    		session_start();
+            if (!isset($_SESSION["user_id"]))
+            {
+                header("location: login.php");
+            }
+    	?>
+    	//var user_id = <?php echo $_SESSION["user_id"];?>;
+    	//window.alert(user_id);
+    </script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -167,7 +177,7 @@ input:checked + .slider:before {
                       </a>
                   </li>
                  <li class="mt">
-                      <a href="login.html">
+                      <a href="backend/end_session.php">
                           <i class="glyphicon glyphicon-log-out"></i>
                           <span>Logout</span>
                       </a>

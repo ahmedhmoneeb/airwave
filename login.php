@@ -31,20 +31,21 @@
 			window.addEventListener("load",connectToHtml);
 			function connectToHtml()
 			{
-				email=document.getElementById("email");
-				Pass=document.getElementById("Password");
-				error=document.getElementById("diverr");
-				form=document.getElementById("login");
-				form.addEventListener("submit",submitFunction);
+				loginBtn = document.getElementById("loginButton");
+				loginBtn.addEventListener("click",submitFunction);
 				
 			}
 			
 			function submitFunction()
 			{
+				email=document.getElementById("email").value;
+				pass=document.getElementById("Password").value;
+				document.getElementById("diverr").setAttribute("style","display:none");
+				
 				request=new XMLHttpRequest();
-				url="../login.php";
-				prms="id="+email+"&password="+pass;
-				request.open("POST","url",true);
+				url="backend/login.php";
+				prms="mail="+email+"&pass="+pass;
+				request.open("POST",url,true);
 				request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 				var resp;
 				request.onreadystatechange=function()
@@ -52,14 +53,15 @@
 					if(request.readyState==4 && request.status==200 )
 					{
 						resp = JSON.parse(request.responseText);
-						if (resp.status == 'yes')
+						if (resp['status'] == 'True')
 						{
-							//window.alert("test");
-							window.location = "localhost/airwave/dashboard.html";
+							//window.alert("Good Shit");
+
+							window.location = "backend/start_session.php?user_id=" + resp['user_id'];
 						}
 						else
 						{
-							//window.alert("failed");
+							//window.alert("Bad shit");
 							document.getElementById("diverr").setAttribute("style","display:block");
 						}
 					}
@@ -83,7 +85,7 @@
 	  <div id="login-page">
 	  	<div class="container">
 	  	
-		      <form class="form-login" action="dashboard.html" method="POST" id="login">
+		      <form class="form-login" method="POST" id="login">
 		        <h2 class="form-login-heading">sign in now</h2>
 		        <div class="login-wrap">
 					<div id="diverr" class="alert alert-danger" style="display:none;">
@@ -106,7 +108,7 @@
 		                <span class="pull-right">
 		                </span>
 		            </label>
-		            <button class="btn btn-theme btn-block"  type="submit"> SIGN IN</button>
+		            <button class="btn btn-theme btn-block" type="button" id="loginButton">SIGN IN</button>
 		            <hr>
 		            <div class="registration">
 		                Don't have an account yet?<br/>
@@ -118,26 +120,7 @@
 		        </div>
 		
 		          <!-- Modal -->
-		          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
-		              <div class="modal-dialog">
-		                  <div class="modal-content">
-		                      <div class="modal-header">
-		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                          <h4 class="modal-title">Forgot Password ?</h4>
-		                      </div>
-		                      <div class="modal-body">
-		                          <p>Enter your e-mail address below to reset your password.</p>
-		                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
-		
-		                      </div>
-		                      <div class="modal-footer">
-		                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-		                          <button class="btn btn-theme" type="button">Submit</button>
-		                      </div>
-		                  </div>
-		              </div>
-		          </div>
-		          <!-- modal -->
+		         
 		
 		      </form>	  	
 	  	
